@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Sign Up page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery.min.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function () {
+                $("signUpform").submit(function () {
+
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "doSignUpPage.php",
+                        data: "radius=" + radius + "&type=" + type,
+                        cache: false,
+                        dataType: "JSON",
+                        success: function (response) {
+                            $('#results').html(response.result);
+
+
+
+                        },
+                        error: function (obj, textStatus, errorThrown) {
+                            console.log("Error " + textStatus + ": " + errorThrown);
+                        }
+                    });
+                    
+                    return false;
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Sign Up Page</h2>
+            <form id="signUpForm" method="post">
+                <div class="form-group">
+                    <label for="idName">Name</label>
+                    <input type="text" class="form-control" id="idRad" name="radius">
+                    <label for="idName">Password</label>
+                    <input type="text" class="form-control" id="idRad" name="radius">
+                    <label for="idName">Weight(Kg)</label>
+                    <input type="text" class="form-control" id="idRad" name="radius">
+                    <label for="idName">Height(m)</label>
+                    <input type="text" class="form-control" id="idRad" name="radius">
+                    <label for="idName">Date of birth</label>
+                    <input type="text" class="form-control" id="idRad" name="radius">
+                </div>
+                <div class="form-group">
+                    <label>Active Level: </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineCheckbox1" name="type" value="area">
+                        <label class="form-check-label" for="inlineCheckbox1">Sedentary</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineCheckbox2" name="type" value="circumference">
+                        <label class="form-check-label" for="inlineCheckbox2">Moderate</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineCheckbox2" name="type" value="circumference">
+                        <label class="form-check-label" for="inlineCheckbox2">Active</label>
+                    </div>
+
+                </div>
+                <input type="submit" class="btn btn-primary" value="Sign Up"/>
+                <input type="reset" class="btn btn-default" id="btnReset" value="Reset"/>
+            </form>
+            <br/>
+            <p id="results"></p>
+        </div>
+    </body>
+</html>
